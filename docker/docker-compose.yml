@@ -1,0 +1,68 @@
+version: '3'
+services:
+  db:
+    image: postgres:14
+    container_name: database
+    restart: always
+    environment:
+      - POSTGRES_DB=${PSQL_DB}
+      - POSTGRES_USER=${PSQL_DB_USER}
+      - POSTGRES_PASSWORD=${PSQL_DB_PASS}
+      - POSTGRES_ROOT_PASSWORD=${PSQL_DB_ROOT_PASS}
+    ports:
+      - '5432:5432'
+    networks:
+      - private
+    volumes:
+      - ./data/database:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready"]
+      timeout: 10s
+      retries: 6
+
+  web:
+    image: registry.gitlab.com/hayth3m/node-3tier-app/web:latest
+    container_name: web
+    restart: always
+    environment:
+      - PORT=${W_PORT}
+      - API_HOST
+    ports:
+      - ${W_PORT}:${W_PORT}
+    networks:
+      - public
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      interval: 7s
+      timeout: 5s
+      retries: 10
+
+  api:
+    image: registry.gitlab.com/hayth3m/node-3tier-app/api:latest
+    container_name: api
+    restart: always
+    environment:
+      - PORT${A_PORT}
+      - DB 
+      - DBUSER
+      - DBPASS
+      - DBHOST
+      - DBPORT
+    ports:
+      - ${A_PORT}:${A_PORT}
+    networks:
+      - public
+      - private
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+networks:
+  private:
+  public:
