@@ -1,0 +1,12 @@
+# Secrets
+terraform/.secrets.tfvars
+
+# Local dirs
+terraform/.terraform
+
+# State files
+terraform/*.tfstate.*
+
+# Logs
+terraform/*.log
+
