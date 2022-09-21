@@ -19,5 +19,5 @@ output "kubernetes-worker-instances" {
     for node in aws_instance.k8s_workers:
       node.tags.Name => node.public_ip
   }
-
 }
+

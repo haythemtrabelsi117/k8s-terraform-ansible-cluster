@@ -6,8 +6,8 @@ variable "infrasharedprops" {
     ami = "ami-052efd3df9dad4825"
     itype = "t2.micro"
     publicip = true
-    authkeypair = "ht-pko"
     secgroupname = "tt-k8s-cluster-security-group"
+    keypair_name = "tt-k8s-cluster-keys"
     }
 }
 

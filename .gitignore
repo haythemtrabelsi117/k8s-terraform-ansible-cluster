@@ -1,3 +1,6 @@
+# Key pair
+ansible/*_key*
+
 # Secrets
 terraform/.secrets.tfvars
 

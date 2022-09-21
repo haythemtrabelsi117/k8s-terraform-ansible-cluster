@@ -1,3 +1,14 @@
+resource "tls_private_key" "key-toptal_k8s_infra" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
+resource "aws_key_pair" "generated_keys" {
+  key_name   = lookup(var.infrasharedprops, "keypair_name")
+  public_key = tls_private_key.key-toptal_k8s_infra.public_key_openssh
+}
+
+
 resource "aws_vpc" "vpc-toptal_k8s_infra" {
   cidr_block = "10.0.0.0/16"
   tags = {
@@ -83,7 +94,7 @@ resource "aws_instance" "k8s_loadbalancers" {
   ami = lookup(var.infrasharedprops, "ami")
   instance_type = lookup(var.infrasharedprops, "itype")
   associate_public_ip_address = lookup(var.infrasharedprops, "publicip")
-  key_name = lookup(var.infrasharedprops, "authkeypair")
+  key_name = aws_key_pair.generated_keys.key_name
 
   subnet_id = aws_subnet.subnet-toptal_k8s_infra.id
 
@@ -114,7 +125,7 @@ resource "aws_instance" "k8s_masters" {
   ami = lookup(var.infrasharedprops, "ami")
   instance_type = lookup(var.infrasharedprops, "itype")
   associate_public_ip_address = lookup(var.infrasharedprops, "publicip")
-  key_name = lookup(var.infrasharedprops, "authkeypair")
+  key_name = aws_key_pair.generated_keys.key_name
 
   subnet_id = aws_subnet.subnet-toptal_k8s_infra.id
 
@@ -145,7 +156,7 @@ resource "aws_instance" "k8s_workers" {
   ami = lookup(var.infrasharedprops, "ami")
   instance_type = lookup(var.infrasharedprops, "itype")
   associate_public_ip_address = lookup(var.infrasharedprops, "publicip")
-  key_name = lookup(var.infrasharedprops, "authkeypair")
+  key_name = aws_key_pair.generated_keys.key_name
 
   subnet_id = aws_subnet.subnet-toptal_k8s_infra.id
 

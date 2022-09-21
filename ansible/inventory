@@ -1,0 +1,18 @@
+[k8s_loadbalancers]
+44.211.120.181
+44.199.245.76
+
+[k8s_masters]
+34.201.56.166
+44.193.2.131
+44.192.63.247
+
+[k8s_workers]
+44.204.102.191
+44.204.140.82
+34.237.142.54
+
+[all:vars]
+ansible_ssh_user=ubuntu
+ansible_ssh_private_key_file=./tt_k8s_key
+ansible_ssh_common_args="-o StrictHostKeyChecking=no"
