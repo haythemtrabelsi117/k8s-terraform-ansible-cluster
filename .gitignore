@@ -5,7 +5,7 @@ terraform/.secrets.tfvars
 terraform/.terraform
 
 # State files
-terraform/*.tfstate.*
+terraform/*.tfstate*
 
 # Logs
 terraform/*.log
