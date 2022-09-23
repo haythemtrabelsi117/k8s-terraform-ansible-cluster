@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: db-config
+  labels:
+    app: db
+data:
+  POSTGRES_DB: tt-app-db
+  POSTGRES_USER: tt-app-db-user
+  POSTGRES_PASSWORD: tt-app-db-pass
+  POSTGRES_ROOT_PASSWORD: jzaeAZEke@z/

@@ -1,0 +1,7 @@
+---
+- name: Provision the Toptal kubernetes
+  hosts: all
+
+  roles:
+    - masters
+    - workers

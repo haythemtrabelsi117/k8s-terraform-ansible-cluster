@@ -46,7 +46,7 @@ services:
     container_name: api
     restart: always
     environment:
-      - PORT${A_PORT}
+      - PORT=${A_PORT}
       - DB 
       - DBUSER
       - DBPASS

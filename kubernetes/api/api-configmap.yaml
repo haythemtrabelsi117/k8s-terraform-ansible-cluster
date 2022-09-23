@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-config
+  labels:
+    app: api
+data:
+  DB: "tt-app-db"
+  BUSER: "tt-app-db-user"
+  DBPASS: "tt-app-db-pass"
+  DBHOST: "database"
+  DBPORT: "5432"

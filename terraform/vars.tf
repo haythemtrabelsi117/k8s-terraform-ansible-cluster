@@ -11,17 +11,11 @@ variable "infrasharedprops" {
     }
 }
 
-variable "k8s_loadbalancerprops" {
-    type = map
-    default ={
-    subnet = "subnet-lb"
-  }
-}
-
 variable "k8s_masterprops" {
     type = map
     default ={
     subnet = "subnet-k8s-master"
+    itype = "t2.medium"
   }
 }
 

@@ -3,19 +3,14 @@ resource "local_file" "inventory" {
  filename = "../ansible/inventory"
  file_permission = "0644"
  content = <<EOF
-[k8s_loadbalancers]
-%{ for node in aws_instance.k8s_loadbalancers ~}
-${node.public_ip}
-%{ endfor ~}
-
 [k8s_masters]
 %{ for node in aws_instance.k8s_masters ~}
-${node.public_ip}
+${node.tags.Name} ansible_host=${node.public_ip}
 %{ endfor ~}
 
 [k8s_workers]
 %{ for node in aws_instance.k8s_workers ~}
-${node.public_ip}
+${node.tags.Name} ansible_host=${node.public_ip}
 %{ endfor ~}
 
 [all:vars]

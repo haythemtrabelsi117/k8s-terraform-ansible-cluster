@@ -1,16 +1,12 @@
-[k8s_loadbalancers]
-44.211.120.181
-44.199.245.76
-
 [k8s_masters]
-34.201.56.166
-44.193.2.131
-44.192.63.247
+TT-K8S-MASTER-1 ansible_host=3.237.62.133
+TT-K8S-MASTER-2 ansible_host=54.242.160.142
+TT-K8S-MASTER-3 ansible_host=100.27.47.29
 
 [k8s_workers]
-44.204.102.191
-44.204.140.82
-34.237.142.54
+TT-K8S-WORKER-1 ansible_host=3.238.149.32
+TT-K8S-WORKER-2 ansible_host=52.207.249.185
+TT-K8S-WORKER-3 ansible_host=3.216.126.96
 
 [all:vars]
 ansible_ssh_user=ubuntu
